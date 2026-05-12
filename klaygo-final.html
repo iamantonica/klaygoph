@@ -32,7 +32,7 @@ nav img{height:26px;}
 .recur-row input:focus{outline:none;border-color:var(--pr);}
 .recur-remove{width:22px;height:22px;border:1.5px solid var(--rbdr);border-radius:4px;background:#fff;color:var(--red);font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;line-height:1;}
 
-.hero{background:linear-gradient(130deg,var(--pr),var(--mn));padding:20px 20px 16px;text-align:center;}
+.hero{background:#0D1F3C;padding:20px 20px 16px;text-align:center;}
 .hero h1{font-size:clamp(16px,3.5vw,22px);font-weight:700;color:#fff;margin-bottom:4px;}
 .hero p{color:rgba(255,255,255,.55);font-size:11px;max-width:480px;margin:0 auto;line-height:1.6;}
 .est-id{display:inline-block;background:rgba(255,255,255,.1);color:var(--li);border-radius:10px;padding:3px 10px;font-size:10px;font-weight:600;margin-top:6px;letter-spacing:.04em;}
@@ -255,7 +255,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;
 .pd{color:var(--pr);font-weight:700;flex-shrink:0;}
 
 /* CTA BLOCK */
-.cta-block{background:linear-gradient(135deg,var(--pr),var(--mn));border-radius:var(--r);padding:14px;margin-bottom:8px;text-align:center;}
+.cta-block{background:#0D1F3C;border-radius:var(--r);padding:14px;margin-bottom:8px;text-align:center;}
 .cta-block h3{font-size:13px;font-weight:700;color:#fff;margin-bottom:5px;}
 .cta-block p{font-size:10.5px;color:rgba(255,255,255,.65);line-height:1.6;margin-bottom:10px;}
 
@@ -428,7 +428,7 @@ footer{background:var(--mn);text-align:center;padding:10px;color:rgba(255,255,25
           <div class="co-name">Deep Cleaning</div>
           <div class="co-desc">Thorough top-to-bottom clean covering areas often missed — behind appliances, inside cabinets, grout, baseboards & more.</div>
         </div>
-        <div class="co-badge co-extra">Base + P20/sqm</div>
+        <div class="co-badge co-extra">Base + P25/sqm</div>
       </div>
       <div class="clean-opt" id="ct-moveinout" onclick="selCleanType('moveinout')">
         <div class="co-radio"></div>
@@ -436,7 +436,7 @@ footer{background:var(--mn);text-align:center;padding:10px;color:rgba(255,255,25
           <div class="co-name">Move In / Move Out</div>
           <div class="co-desc">Comprehensive cleaning for properties being vacated or newly occupied. Covers all regular cleaning areas plus inside cabinets, drawers, appliance interiors, and hard-to-reach corners — leaving the space fresh and ready for the next occupant.</div>
         </div>
-        <div class="co-badge co-extra">Base + P30/sqm</div>
+        <div class="co-badge co-extra">Base + P40/sqm</div>
       </div>
     </div>
     <div class="sqm-section" id="sqm-section" style="display:none;">
@@ -444,7 +444,7 @@ footer{background:var(--mn);text-align:center;padding:10px;color:rgba(255,255,25
         <label>Total area in sqm: <span id="sqm-lbl">30 sqm</span></label>
         <input type="range" id="sqm-slider" min="10" max="200" value="30" oninput="onSqmSlide(this)">
       </div>
-      <div style="font-size:9.5px;color:var(--se);margin-top:4px;padding:4px 8px;background:var(--pa);border-radius:4px;" id="sqm-rate-note">Deep cleaning fee = base price + (P20 x sqm) &nbsp;|&nbsp; Move In/Out fee = base price + (P30 x sqm)</div>
+      <div style="font-size:9.5px;color:var(--se);margin-top:4px;padding:4px 8px;background:var(--pa);border-radius:4px;" id="sqm-rate-note">Deep cleaning fee = base price + (P25 x sqm) &nbsp;|&nbsp; Move In/Out fee = base price + (P40 x sqm)</div>
     </div>
     <div class="post-con-note">
       <strong>Post-Construction Cleaning</strong>
@@ -512,7 +512,7 @@ footer{background:var(--mn);text-align:center;padding:10px;color:rgba(255,255,25
   <!-- LOCATION -->
   <div class="card locked" id="card-loc">
     <div class="card-head"><div class="sbadge">7</div><div><h2>Location</h2><p>Transport calculated from TAGUIG</p></div></div>
-    <div class="tn">P50 base (first 2 km) + P10/km up to 6 km + P15/km beyond. Fixed rates within Taguig. Round-trip applies beyond Taguig.</div>
+    <div class="tn">Fixed transport rates apply within Taguig service areas. Locations outside Taguig may require distance-based transport computation and round-trip consideration.</div>
     <div class="loc-grid" id="loc-grid"></div>
     <div class="other-inp" id="other-inp"><input type="text" id="other-txt" placeholder="Type your area / city..." oninput="compute()"></div>
     <div class="loc-note">This estimate includes a provisional transport fee based on distance and standard rates. Final transport cost will be verified using real-time booking rates to ensure fair and accurate pricing.</div>
@@ -602,10 +602,10 @@ const HS_BASE = 800, HS_HRS = 5, HS_EXTRA = 150;
 const STORED = JSON.parse(localStorage.getItem('kn') || '[]');
 
 const ADDONS = [
-  {id:'room',    name:'Additional Room',      note:'per room — select type(s)',           price:200, qty:true,  max:8,  tm:30, tx:45},
-  {id:'bath',    name:'Additional Bathroom',  note:'per bathroom',                        price:200, qty:true,  max:10, tm:30, tx:45},
-  {id:'balcony', name:'Additional Balcony',   note:'per balcony · ~30–45 min each',       price:150, qty:true,  max:5,  tm:30, tx:45},
-  {id:'declut',  name:'Declutter / Organize', note:'per cabinet or area · ~25–45 min each', price:150, qty:true, max:10, tm:25, tx:45},
+  {id:'room',    name:'Additional Room',      note:'per room — select type(s)',           price:250, qty:true,  max:8,  tm:30, tx:45},
+  {id:'bath',    name:'Additional Bathroom',  note:'per bathroom',                        price:250, qty:true,  max:10, tm:30, tx:45},
+  {id:'balcony', name:'Additional Balcony',   note:'per balcony · ~30–45 min each',       price:250, qty:true,  max:5,  tm:30, tx:45},
+  {id:'declut',  name:'Declutter / Organize', note:'per cabinet or area · ~25–45 min each', price:250, qty:true, max:10, tm:25, tx:45},
   {id:'dish',    name:'Dishwashing',          note:'per set · up to 15 items',            price:150, qty:true,  max:5,  tm:25, tx:40},
   {id:'fold',    name:'Folding Clothes',      note:'per set · up to 20 items',            price:150, qty:true,  max:5,  tm:20, tx:30},
   {id:'iron',    name:'Ironing / Steam',      note:'per set · up to 10 items',            price:200, qty:true,  max:5,  tm:30, tx:45},
