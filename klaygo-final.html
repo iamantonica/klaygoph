@@ -1575,24 +1575,16 @@ async function sendEstimateEmail(msg){
       _replyto:'info.klaygoph@gmail.com',
       name: name||'Customer',
       email: email,
-      message: 'Hi '+( name||'there')+'!
-
-Thank you for using the Klaygo PH Service Calculator. Here is a copy of your estimate for your records.
-
-'
-        + msg
-        + '
-
----
-We will be in touch shortly to confirm your schedule and send payment details for the reservation fee.'
-        + '
-
-📩 Messenger: m.me/klaygoph
-📱 0992.816.4718
-🌐 @KlayGoPH (IG/FB)
-
-Cleaner Space, Clearer Mind.
-Klaygo PH'
+message:
+'Hi ' + (name || 'there') + '!\n\n' +
+'Thank you for using the Klaygo PH Service Calculator. Here is a copy of your estimate for your records.\n\n' +
+msg +
+'\n\n---\nWe will be in touch shortly to confirm your schedule and send payment details for the reservation fee.\n\n' +
+'📩 Messenger: m.me/klaygoph\n' +
+'📱 0992.816.4718\n' +
+'🌐 @KlayGoPH (IG/FB)\n\n' +
+'Cleaner Space, Clearer Mind.\n' +
+'Klaygo PH'
     };
     try{
       await fetch('https://formspree.io/f/'+FORMSPREE_ID,{
