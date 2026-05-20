@@ -310,7 +310,17 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
 .btn-reset:hover{color:rgba(255,255,255,.45);}
 .toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(60px);background:var(--mn);color:#fff;padding:10px 18px;border-radius:20px;font-size:11.5px;font-weight:500;box-shadow:0 4px 16px rgba(0,0,0,.25);opacity:0;transition:all .3s;z-index:999;text-align:center;max-width:320px;pointer-events:none;}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
-footer{background:var(--mn);text-align:center;padding:11px;color:rgba(255,255,255,.22);font-size:9.5px;}
+footer{background:var(--mn);padding:11px 20px;}
+.footer-inner{display:flex;flex-direction:column;align-items:center;gap:5px;text-align:center;}
+.footer-inner span{color:rgba(255,255,255,.22);font-size:9.5px;}
+.footer-contacts{display:flex;align-items:center;gap:6px;color:rgba(255,255,255,.35) !important;font-size:9.5px !important;}
+.footer-icon-link{display:inline-flex;align-items:center;color:rgba(255,255,255,.45);transition:color .13s;}
+.footer-icon-link:hover{color:rgba(255,255,255,.85);}
+.follow-bar{background:var(--pr);padding:14px 20px;text-align:center;}
+.follow-text{font-size:10px;color:rgba(255,255,255,.7);margin-bottom:8px;font-style:italic;}
+.follow-links{display:flex;justify-content:center;gap:14px;}
+.follow-link{display:inline-flex;align-items:center;gap:6px;color:#fff;font-size:11.5px;font-weight:600;text-decoration:none;padding:6px 14px;border:1.5px solid rgba(255,255,255,.3);border-radius:20px;transition:all .14s;}
+.follow-link:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.6);}
 @media print{body{display:none;}}
 </style>
 </head>
@@ -368,20 +378,24 @@ footer{background:var(--mn);text-align:center;padding:11px;color:rgba(255,255,25
     </div>
     <div class="area-input-row">
       <label>Type exact sqm:</label>
-      <input type="number" id="area-num" min="10" max="500" value="30" oninput="onAreaInput(this)">
+      <input type="number" id="area-num" min="10" max="150" value="30" oninput="onAreaInput(this)">
     </div>
-    <input type="range" id="area-slider" min="10" max="200" value="30" oninput="onAreaSlide(this)">
-    <div style="display:flex;justify-content:space-between;font-size:9px;color:var(--gr);margin-top:3px;"><span>10 sqm</span><span>200 sqm</span></div>
-    <div class="area-note">Move the slider or type your exact area. Properties over 45 sqm are priced per sqm.</div>
+    <input type="range" id="area-slider" min="10" max="120" value="30" oninput="onAreaSlide(this)">
+    <div style="display:flex;justify-content:space-between;font-size:9px;color:var(--gr);margin-top:3px;"><span>10 sqm</span><span>120 sqm</span></div>
+    <div class="area-note">Move the slider or type your exact area. Properties over 45 sqm are priced per sqm. We currently do not accommodate spaces exceeding 150 sqm — we take our time with every property and want to guarantee the quality of our work.</div>
     <div class="large-space-note" id="large-note">
       <strong>Large Space Detected (over 45 sqm)</strong>
       <p style="margin-bottom:6px;">Your space qualifies for custom per-sqm pricing. Here's how it's calculated:</p>
       <table>
         <tr><td>Regular Cleaning</td><td>P28/sqm</td></tr>
         <tr><td>Deep Cleaning</td><td>P33/sqm</td></tr>
-        <tr><td>Move In / Move Out</td><td>P48/sqm</td></tr>
+        <tr><td>Move In / Move Out</td><td>P40/sqm</td></tr>
       </table>
       <p style="margin-top:5px;font-size:9px;color:var(--amber);">Final price = sqm x rate above. Select your cleaning type to see the computed amount.</p>
+    </div>
+    <div class="large-space-note" id="too-large-note" style="display:none;background:var(--rbg);border-color:var(--rbdr);">
+      <strong style="color:var(--red);">Space Exceeds Our Current Limit</strong>
+      <p style="color:var(--red);font-size:10px;line-height:1.5;">We currently accept bookings for spaces up to 150 sqm to ensure we give every property the dedicated, quality attention it deserves. For spaces larger than 150 sqm, please message us directly so we can work something out for you!</p>
     </div>
   </div>
 </div>
@@ -518,7 +532,6 @@ footer{background:var(--mn);text-align:center;padding:11px;color:rgba(255,255,25
 
 <!-- CTA -->
 <div class="cta-block">
-  <h3>Ready to Secure Your Slot?</h3>
   <p>Tap below to send your estimate on Messenger. We'll verify your schedule, confirm the transport fee, and send your final total with payment details.</p>
   <button class="btn-book" style="width:100%;margin:0;" onclick="bookNow()">Book on Messenger</button>
 </div>
@@ -530,6 +543,8 @@ footer{background:var(--mn);text-align:center;padding:11px;color:rgba(255,255,25
   <div class="pi"><div class="pd">-</div><div><strong>Reschedule:</strong> Allowed with at least 24 hours notice.</div></div>
   <div class="pi"><div class="pd">-</div><div><strong>Cancellation:</strong> Downpayment is non-refundable if cancelled less than 24 hrs before, or if the cleaner is already on the way or onsite.</div></div>
   <div class="pi"><div class="pd">-</div><div><strong>Exception:</strong> If booked less than 24 hrs in advance and you cancel at least 4 hrs before with cleaner not yet departed — a refund or rebooking may be arranged.</div></div>
+  <div class="pi"><div class="pd">-</div><div><strong>Large Spaces (90+ sqm):</strong> An additional cleaner will be assigned to ensure quality and efficiency. This may affect scheduling — we'll confirm details upon booking.</div></div>
+  <div class="pi"><div class="pd">-</div><div><strong>Larger Spaces (90+ sqm) &amp; Weekend Slots:</strong> A <strong>50% downpayment</strong> is required to secure and confirm your booking reservation.</div></div>
 </div>
 
 <!-- FEEDBACK -->
@@ -546,6 +561,7 @@ footer{background:var(--mn);text-align:center;padding:11px;color:rgba(255,255,25
 <div class="panel-right">
   <div class="pcard">
     <div class="phead">
+      <img id="est-logo-img" alt="Klaygo PH" style="height:22px;display:block;margin-bottom:6px;opacity:.9;">
       <div class="pest-id" id="p-est-id">—</div>
       <h3>Your Estimate</h3>
       <div class="ptotal"><span>P</span><span id="ptotd">0</span></div>
@@ -557,7 +573,7 @@ footer{background:var(--mn);text-align:center;padding:11px;color:rgba(255,255,25
     <div class="pay-box" id="pay-box" style="display:none;">
       <h4>Payment Schedule</h4>
       <div class="pr"><span class="pk">Reservation fee (pay to confirm)</span><span class="pv" id="pay-dp">—</span></div>
-      <div class="pr pay-now"><span class="pk">Balance on each service day</span><span class="pv" id="pay-bal">—</span></div>
+      <div class="pr pay-now"><span class="pk">Balance on service day</span><span class="pv" id="pay-bal">—</span></div>
       <div class="pay-note">Reservation fee = transport fee. Confirms your slot. Balance paid on service day.</div>
     </div>
     <div class="recur-panel" id="recur-panel"></div>
@@ -573,7 +589,34 @@ footer{background:var(--mn);text-align:center;padding:11px;color:rgba(255,255,25
 
 </div><!-- /main -->
 
-<footer>Klaygo PH &nbsp;·&nbsp; Cleaning Services &nbsp;·&nbsp; Metro Manila &nbsp;|&nbsp; IG / Messenger: @KlaygoPH &nbsp;|&nbsp; 0992.816.4718</footer>
+<div class="follow-bar">
+  <p class="follow-text">Follow us for tips, updates &amp; promos!</p>
+  <div class="follow-links">
+    <a href="https://www.instagram.com/klaygoph/" target="_blank" rel="noopener" class="follow-link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+      @klaygoph
+    </a>
+    <a href="https://www.facebook.com/klaygoph/" target="_blank" rel="noopener" class="follow-link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 2C6.477 2 2 6.145 2 11.25c0 2.792 1.3 5.29 3.35 6.993V21l3.08-1.694c.822.228 1.694.35 2.57.35 5.523 0 10-4.145 10-9.25S17.523 2 12 2zm1 12.44l-2.5-2.69-4.91 2.69 5.41-5.74 2.56 2.69 4.85-2.69L13 14.44z"/></svg>
+      @klaygoph
+    </a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <span>Klaygo PH &nbsp;·&nbsp; Cleaning Services &nbsp;·&nbsp; Metro Manila</span>
+    <span class="footer-contacts">
+      <a href="https://www.instagram.com/klaygoph/" target="_blank" rel="noopener" class="footer-icon-link" title="Instagram">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+      </a>
+      <a href="https://m.me/klaygoph" target="_blank" rel="noopener" class="footer-icon-link" title="Messenger">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M12 2C6.477 2 2 6.145 2 11.25c0 2.792 1.3 5.29 3.35 6.993V21l3.08-1.694c.822.228 1.694.35 2.57.35 5.523 0 10-4.145 10-9.25S17.523 2 12 2zm1 12.44l-2.5-2.69-4.91 2.69 5.41-5.74 2.56 2.69 4.85-2.69L13 14.44z"/></svg>
+      </a>
+      @KlayGoPH &nbsp;|&nbsp; 0992.816.4718
+    </span>
+  </div>
+</footer>
 <div class="toast" id="toast"></div>
 
 <script>
@@ -595,7 +638,7 @@ var PRINT_BG   = 'https://raw.githubusercontent.com/klaygoph/klaygoph/main/Klayg
 
 // Pricing
 var BASE_PRICES  = {studio:600, br1:750, br2:900};
-var LARGE_RATES  = {regular:28, deep:33, moveinout:48};
+var LARGE_RATES  = {regular:28, deep:33, moveinout:40};
 var DEEP_RATE    = 25;  // per sqm surcharge for deep (<=45sqm)
 var MIO_RATE     = 40;  // per sqm surcharge for move in/out (<=45sqm)
 var LARGE_CUTOFF = 45;  // sqm threshold
@@ -614,8 +657,6 @@ var ADDONS = [
   {id:'iron',    name:'Ironing / Steam',      note:'per set · up to 10 items',            price:200, qty:true,  max:5,  tm:30, tx:45},
   {id:'fridge',  name:'Fridge Cleaning',      note:'per fridge',                          price:200, qty:true,  max:3,  tm:30, tx:60},
   {id:'fan',     name:'Fan Cleaning',         note:'per fan',                             price:150, qty:true,  max:10, tm:15, tx:20},
-  {id:'hs',      name:'House Sitting',        note:'P800/first 5 hrs · P150/hr beyond · weekends only · 72 hrs advance notice',
-                                                                                           price:800, qty:false, max:1,  tm:0,  tx:0},
 ];
 
 var LOCS = [
@@ -825,19 +866,22 @@ function setAvail(type,msg){var el=document.getElementById('avail-box');if(el){e
 
 // ── AREA SIZE ─────────────────────────────────────────────────
 function syncArea(val){
-  val=Math.max(10,Math.min(500,+val||30));
+  val=Math.max(10,Math.min(150,+val||30));
   S.sqm=val;
   S.isLarge=val>LARGE_CUTOFF;
+  var tooLarge=val>150;
   document.getElementById('area-display').textContent=val;
   var numEl=document.getElementById('area-num'); if(numEl)numEl.value=val;
   var slider=document.getElementById('area-slider');
   if(slider){
-    var sv=Math.min(val,200); slider.value=sv;
-    var pct=((sv-10)/(200-10)*100)+'%';
+    var sv=Math.min(val,120); slider.value=sv;
+    var pct=((sv-10)/(120-10)*100)+'%';
     slider.style.setProperty('--pct',pct);
   }
   var ln=document.getElementById('large-note');
-  if(ln)ln.classList.toggle('show',S.isLarge);
+  if(ln)ln.classList.toggle('show',S.isLarge&&val<=150);
+  var tln=document.getElementById('too-large-note');
+  if(tln)tln.style.display=val>150?'block':'none';
   compute();
 }
 function onAreaSlide(inp){syncArea(+inp.value);}
@@ -991,10 +1035,25 @@ function selLoc(id){
 
 // ── TIME CALC ─────────────────────────────────────────────────
 function cT(){
-  if(!S.btmin)return null;
-  var mn=S.btmin,mx=S.btmax;
-  if(S.cleanType==='deep'){mn+=60;mx+=90;}
-  else if(S.cleanType==='moveinout'){mn+=90;mx+=150;}
+  // Need a unit type selected for small spaces, or large-space mode
+  if(!S.isLarge && !S.bp) return null;
+  var sqm=S.sqm, mn, mx;
+  if(S.cleanType==='regular'){
+    if(sqm<40){mn=120;mx=180;}
+    else if(sqm<=90){mn=180;mx=240;}
+    else if(sqm<=120){mn=240;mx=300;}
+    else{mn=300;mx=360;}
+  } else if(S.cleanType==='deep'){
+    if(sqm<40){mn=240;mx=270;}
+    else if(sqm<=90){mn=240;mx=360;}
+    else if(sqm<=120){mn=360;mx=480;}
+    else{mn=480;mx=600;}
+  } else { // moveinout
+    if(sqm<40){mn=270;mx=360;}
+    else if(sqm<=90){mn=360;mx=480;}
+    else if(sqm<=120){mn=480;mx=600;}
+    else{mn=600;mx=840;}
+  }
   ADDONS.forEach(function(a){if(a.id==='hs')return;var q=S.addons[a.id]||0;if(q>0){mn+=a.tm*q;mx+=a.tx*q;}});
   return{mn:mn,mx:mx};
 }
@@ -1051,7 +1110,14 @@ function compute(){
   html+='<div class="li st"><span class="ll">Estimated Total</span><span class="lv">P'+total.toLocaleString()+'</span></div>';
   body.innerHTML=html;
   var pb=document.getElementById('pay-box');
-  if(tf>0){pb.style.display='block';document.getElementById('pay-dp').textContent='P'+tf.toLocaleString();document.getElementById('pay-bal').textContent='P'+Math.max(0,total-tf).toLocaleString();}
+  if(tf>0){
+    pb.style.display='block';
+    document.getElementById('pay-dp').textContent='P'+tf.toLocaleString();
+    document.getElementById('pay-bal').textContent='P'+Math.max(0,total-tf).toLocaleString();
+    var multiDate=recurSlots.filter(function(s){return s.date;}).length>0||S.sched!=='Initial / One-time';
+    var balLbl=document.querySelector('#pay-box .pr.pay-now .pk');
+    if(balLbl)balLbl.textContent=multiDate?'Balance on each service day':'Balance on service day';
+  }
   else pb.style.display='none';
   document.getElementById('transpo-note').style.display=S.lid?'block':'none';
   updateRecurDP();
@@ -1100,7 +1166,9 @@ function buildMsg(){
   if(S.ln)msg+='Location: '+S.ln+'\n';
   msg+='\nSERVICES:\n'+lines.join('\n')+'\nESTIMATED TOTAL: P'+total.toLocaleString();
   if(t)msg+='\nEst. Duration: You get back '+fmtT(t.mn,t.mx)+' of your day.';
-  if(tf>0)msg+='\n\nReservation fee (pay to confirm): P'+tf.toLocaleString()+'\nBalance on each service day: P'+Math.max(0,total-tf).toLocaleString();
+  var multiDateMsg=recurSlots.filter(function(s){return s.date;}).length>0||S.sched!=='Initial / One-time';
+  var balLabelMsg=multiDateMsg?'Balance on each service day':'Balance on service day';
+  if(tf>0)msg+='\n\nReservation fee (pay to confirm): P'+tf.toLocaleString()+'\n'+balLabelMsg+': P'+Math.max(0,total-tf).toLocaleString();
   var rFilled=recurSlots.filter(function(s){return s.date;});
   if(rFilled.length>0){msg+='\n\nRecurring Dates:\n'+rFilled.map(function(s){return s.date+(s.time?' at '+s.time:'');}).join('\n');if(tf>0)msg+='\nTotal upfront: P'+(tf*rFilled.length).toLocaleString();}
   var sits=[...selSituations].join(', ');if(sits)msg+='\n\nSituation: '+sits;
@@ -1169,7 +1237,9 @@ function openPrint(){
   var sits=[...selSituations].join(', ');var instrHtml='';
   if(sits)instrHtml+='<div class="ib"><h4>Situation</h4><p>'+sits+'</p></div>';
   if(instr)instrHtml+='<div class="ib"><h4>Special Instructions</h4><p>'+instr+'</p></div>';
-  var payHtml=tf>0?'<div class="pay-s"><h4>Payment Schedule</h4><div class="pr"><span class="pk">Reservation fee (confirms your slot)</span><span class="pv">P'+tf.toLocaleString()+'</span></div><div class="pr pn"><span class="pk">Balance on each service day</span><span class="pv">P'+Math.max(0,total-tf).toLocaleString()+'</span></div></div>':'';
+  var multiDatePrint=recurSlots.filter(function(s){return s.date;}).length>0||S.sched!=='Initial / One-time';
+  var balLabelPrint=multiDatePrint?'Balance on each service day':'Balance on service day';
+  var payHtml=tf>0?'<div class="pay-s"><h4>Payment Schedule</h4><div class="pr"><span class="pk">Reservation fee (confirms your slot)</span><span class="pv">P'+tf.toLocaleString()+'</span></div><div class="pr pn"><span class="pk">'+balLabelPrint+'</span><span class="pv">P'+Math.max(0,total-tf).toLocaleString()+'</span></div></div>':'';
   var w=window.open('','_blank','width=560,height=794');
   w.document.write('<!DOCTYPE html><html><head><meta charset="UTF-8">'
     +'<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">'
@@ -1230,6 +1300,8 @@ function openPrint(){
     +'<div class="pi2"><div class="pd2">-</div><div><strong>Reschedule:</strong> At least 24 hours notice required.</div></div>'
     +'<div class="pi2"><div class="pd2">-</div><div><strong>Cancellation:</strong> Downpayment non-refundable if cancelled &lt;24 hrs or cleaner is on the way/onsite.</div></div>'
     +'<div class="pi2"><div class="pd2">-</div><div><strong>Exception:</strong> Booked &lt;24 hrs + cancelled 4+ hrs before + cleaner not yet departed — refund or rebooking may be arranged.</div></div>'
+    +'<div class="pi2"><div class="pd2">-</div><div><strong>Large Spaces (90+ sqm):</strong> An additional cleaner will be assigned to ensure quality.</div></div>'
+    +'<div class="pi2"><div class="pd2">-</div><div><strong>90+ sqm &amp; Weekend Slots:</strong> 50% downpayment required to confirm booking.</div></div>'
     +'</div>'
     +'<div class="nor">This is not an official receipt</div>'
     +'</div>'
@@ -1258,6 +1330,7 @@ function resetAll(){
   document.getElementById('time-grid').innerHTML='<p style="font-size:10.5px;color:var(--gr);">Select a date above to see available slots.</p>';
   document.getElementById('time-alerts').innerHTML='';
   document.getElementById('time-sub').textContent='Choose your date first';
+  var tln=document.getElementById('too-large-note');if(tln)tln.style.display='none';
   ['card-time','card-area','card-clean','card-svc','card-sched','card-ext','card-instr','card-loc','card-info'].forEach(function(id){var el=document.getElementById(id);if(el)el.classList.add('locked');});
   setAvail('none','No date selected yet.');
   currentEstId='';var pe=document.getElementById('p-est-id');if(pe)pe.textContent='—';
@@ -1281,6 +1354,7 @@ function toast(m){var t=document.getElementById('toast');t.textContent=m;t.class
 
 // ── INIT ──────────────────────────────────────────────────────
 document.getElementById('logo-img').src = LIGHT_LOGO;
+document.getElementById('est-logo-img').src = LIGHT_LOGO;
 
 (async function(){
   await fetchMonth(CY,CM);
